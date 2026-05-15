@@ -27,10 +27,8 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
-    blocked: {
-        type: Boolean,
-        default: false
-    }
+    isBlocked: { type: Boolean, default: false },
+    refreshToken: { type: String, default: null },
 }, { timestamps: true })
 
 const User = mongoose.models.User || mongoose.model("User", userSchema)

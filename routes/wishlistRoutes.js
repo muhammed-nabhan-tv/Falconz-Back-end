@@ -5,12 +5,13 @@ import {
     clearWishlist,
     removeFromWishlist
 } from "../controller/wishlistController.js";
+import userAuth from "../middlewares/auth.js";
 
 const wishlistRouter = express.Router();
 
-wishlistRouter.get("/", getWishlist);
-wishlistRouter.post("/add", addToWishlist);
-wishlistRouter.delete("/:productId", removeFromWishlist);
-wishlistRouter.delete("/", clearWishlist);
+wishlistRouter.get("/",userAuth ,getWishlist);
+wishlistRouter.post("/add",userAuth, addToWishlist);
+wishlistRouter.delete("/:productId",userAuth, removeFromWishlist);
+wishlistRouter.delete("/",userAuth, clearWishlist);
 
 export default wishlistRouter

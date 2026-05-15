@@ -1,14 +1,20 @@
 import express from 'express';
 import {
     registerUser,
-    loginUser
+    loginUser,
+    toggleBlockUser,
+    getAllUsers
 } from "../controller/userController.js";
 import User from '../model/UserModel.js';
+import userAuth from '../middlewares/auth.js';
+import { adminAuth } from '../middlewares/adminAuth.js';
+// import userAuth from '../middlewares/auth.js';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.post('/register',registerUser);
-router.post('/login',loginUser)
+userRouter.get('/allusers',userAuth,adminAuth,getAllUsers)
+userRouter.post('/register',registerUser);
+userRouter.post('/login',loginUser)
+userRouter.patch('/block/:id',userAuth,adminAuth,toggleBlockUser)
 
-
-export default router;
+export default userRouter;

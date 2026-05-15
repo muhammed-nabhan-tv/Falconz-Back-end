@@ -7,6 +7,7 @@ import {
     addProduct
 } from "../controller/productController.js"
 import userAuth from "../middlewares/auth.js";
+import { adminAuth } from "../middlewares/adminAuth.js";
 
 const productRouter = express.Router();
 
@@ -14,15 +15,15 @@ const productRouter = express.Router();
 productRouter.get('/',getProducts);
 
 // 2. GET PRODUCTS BY ID 
-productRouter.get('/:id',getProductById);
+productRouter.get('/:id',userAuth,getProductById);
 
 // 3. CREATE NEW PRODUCT 
-productRouter.post('/',addProduct);
+productRouter.post('/',userAuth,adminAuth,addProduct);
 
 // 4. UPDATE PRODUCT BY ID 
-productRouter.put('/:id',updateProduct);
+productRouter.put('/:id',adminAuth,updateProduct);
 
 // 5. DELETE PRODUCT BY ID 
-productRouter.delete('/:id',deleteProduct)
+productRouter.delete('/:id',adminAuth,deleteProduct)
 
 export default productRouter ;

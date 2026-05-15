@@ -16,6 +16,7 @@ const orderSchema = new mongoose.Schema(
           required: true,
         },
         name: String,
+        category:String,
         price: Number,
         quantity: {
           type: Number,
@@ -32,8 +33,26 @@ const orderSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["pending", "delivered", "cancelled"],
+        enum: [
+    "pending",
+    "confirmed",
+    "shipped",
+    "delivered",
+    "cancelled",
+  ],
       default: "pending",
+    },
+    shippingAddress: {
+      address:  { type: String, required: true },
+      city:     { type: String, required: true },
+      pincode:  { type: String, required: true }, // ✅ String not Number — "560001" not 560001
+      phone:    { type: String, required: true }, // ✅ String not Number — handles leading zeros & formatting
+    },
+
+    paymentMethod: {
+      type: String,
+      enum: ["COD", "ONLINE"],
+      default: "COD",
     },
   },
   { timestamps: true }
