@@ -13,7 +13,7 @@ export const addToWishlistService = async (userId,productId)=>{
     let wishlist = await Wishlist.findOneAndUpdate(
       {userId},
       {
-        $addToSet : { products : productId} // no duplicate
+        $addToSet : { products : productId}
       },
       {
         new : true,
